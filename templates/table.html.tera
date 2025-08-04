@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+<script src="config.js"></script>
+<script src="functions.js"></script>
+<script src="../static/bundle.js"></script>
+<script src="plots/plots.js"></script>
+<script src="data/data_{{ current_page }}.js"></script>
+
+</body>
+</html>

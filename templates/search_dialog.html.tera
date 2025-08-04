@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>datavzrd report</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+<script src="../../static/bundle.js"></script>
+<script>
+    const search_data = {{ data | safe }};
+    const table_title = "{{ title }}";
+    datavzrd.load_search();
+</script>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <table id="search-table"></table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

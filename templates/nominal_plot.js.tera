@@ -1,0 +1,19 @@
+let show_plot_{{ index }} = {% if table == "null" %}false{% else %}true{% endif %};
+let plot_{{ index }} = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+    "width": "container",
+    "layer": [
+        {
+            "data": {"values": {{ table }}},
+            "mark": "bar",
+            "encoding": {
+                "x": {
+                    "field": "key",
+                    "sort": {"field": "value", "order": "descending"},
+                    "title": "{{ title }}"
+                },
+                "y": {"field": "value", "type": "quantitative", "title": null}
+            }
+        }
+    ]
+};

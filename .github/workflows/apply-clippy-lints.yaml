@@ -1,0 +1,19 @@
+name: Autofix clippy lints
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Autofix:
+    if: github.repository_owner == 'datavzrd'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install yte
+        run: pip install yte
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Auto apply clippy lints
+        uses: fxwiegand/apply-clippy-lints@v1.0.4

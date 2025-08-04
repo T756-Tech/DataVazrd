@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  Formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+          components: rustfmt
+      
+      - name: Check format
+        run: cargo fmt -- --check
+
+  Linting:
+     runs-on: ubuntu-latest
+     steps:
+       - name: Checkout repository
+         uses: actions/checkout@v2
+
+       - name: Install stable toolchain
+         uses: actions-rs/toolchain@v1
+         with:
+           toolchain: stable
+           override: true
+           components: clippy
+
+       - name: Install yte
+         run: pip install yte
+
+       - name: Install pnpm
+         run: npm install -g pnpm
+
+       - name: Lint with clippy
+         uses: actions-rs/clippy-check@v1
+         with:
+           token: ${{ secrets.GITHUB_TOKEN }}
+
+  Testing:
+    needs: Formatting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Install yte
+        run: pip install yte
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install GitHub CLI
+        run: |
+          sudo apt update
+          sudo apt install gh
+
+      - name: Authenticate with GitHub
+        run: gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+      
+      - uses: Swatinem/rust-cache@v1.3.0
+
+      - uses: actions-rs/cargo@v1
+        with:
+          command: test
+

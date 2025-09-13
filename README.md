@@ -17,8 +17,3 @@ An example report can be [viewed online](https://datavzrd.github.io/datavzrd/ind
 ## Contributing
 
 Contributions of any kind are welcome! For more info check the [contributing guide](https://datavzrd.github.io/docs/contributing.html).
-
-## Authors
-
-* [Johannes Köster](https://github.com/johanneskoester) (https://koesterlab.github.io)
-* [Felix Wiegand](https://github.com/fxwiegand)
